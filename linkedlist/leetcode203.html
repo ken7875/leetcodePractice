@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      class ListNode {
+        constructor (head) {
+          this.head = head
+          this.next = null
+        }
+      }
+
+      class LinkedList {
+        constructor() {
+          this.head = null
+          this.tail = null
+          this.length = 0
+        }
+
+        getNode(idx) {
+          if (idx < 0 || idx >= this.length) return null;
+          let currNode = this.head;
+          let currIndex = 0;
+          while (currIndex < idx) {
+            currIndex += 1;
+            currNode = currNode.next;
+          }
+          return currNode;
+        }
+
+        append(val) {
+          const node = new ListNode(val)
+          if(!this.head) {
+            this.head = node;
+            this.tail = node;
+          } else {
+            this.tail.next = node
+            this.tail = node
+          }
+          this.length++
+        }
+
+        insertAt(idx, val) {
+          if(idx >= this.length) {
+            this.append(val)
+            return
+          }
+
+          let node = new ListNode(val)
+          if(idx <= 0) {
+            this.head = node
+            this.head.next = this.head
+          } else {
+            const prevNode = this.getNode(idx - 1)
+            const curNode = prevNode.next
+            prevNode.next = node
+            node.next = curNode
+          }
+          this.length++
+        }
+
+        removeAt(idx) {
+          if (idx < 0 || idx >= this.length) return;
+          const prevNode = this.getNode(idx - 1)
+          const delNode = prevNode.next
+          const nextNode = delNode.next
+          prevNode.next = nextNode
+          if(nextNode === null) {
+            this.tail = prevNode
+          }
+        }
+      }
+
+      const linkedList = new LinkedList()
+      linkedList.append(1)
+      linkedList.append(2)
+      linkedList.append(3)
+      linkedList.insertAt(2, 4)
+      linkedList.removeAt(2)
+
+      console.log(linkedList)
+
+      // double linkedlist
+      class ListNode2 {
+        constructor(head, prev) {
+          this.head = head
+          this.prev = prev
+          this.next = next
+        }
+      }
+
+      class linkedList2 {
+        constructor() {
+          this.head = null
+          this.tail = null
+        }
+
+        append(val) {
+          let node = new ListNode2(head, prev)
+          if(!this.head) {
+            this.head = node
+            this.tail = node
+          } else {
+            this.tail.prev = this.tail
+            this.tail = node
+            this.tail.next = node
+          }
+        }
+      }
+      // linkedList.insertAt(0, 1)
+      //   class listNode {
+      //     constructor (head) {
+      //       this.head = head
+      //       this.next = null
+      //     }
+      //   }
+
+      //   class linkedList {
+      //     constructor () {
+      //       this.head = null
+      //       this.tail = null;
+      //       this.length = 0
+      //     }
+
+      //     append(val) {
+      //       const node = new listNode(val)
+      //       if(this.length === 0) {
+      //         this.head = node
+      //         console.log(this.head, 'head head head')
+      //       } else {
+      //         let tail = this.head;
+
+      //         while(tail.next !== null) {
+      //           tail = tail.next
+      //         }
+      //         tail.next = node;
+      //       }
+      //       this.length++
+      //     }
+
+      //     insertAt (val, idx) {
+      //       const node = new listNode(val)
+
+      //       let prev = null
+      //       let current = this.head
+            
+      //       let i = 0
+      //       if(idx === 0) {
+      //         this.head = node
+      //         node.next = this.head
+      //         return
+      //       }
+      //       while(i++ < idx) {
+      //         prev = current
+      //         current = current.next
+      //       }
+
+      //       prev.next = node
+      //       node.next = current
+      //       this.length++
+      //     }
+
+      //     remove(idx) {
+      //       if(idx === 0) {
+      //         this.head = this.head.next
+      //         return
+      //       }
+
+      //       let prev = null
+      //       let current = this.head
+      //       let i = 0
+
+      //       while(i++ < idx) {
+      //         prev = current
+      //         current = current.next
+      //       }
+
+      //       prev.next = current.next
+      //       this.length--
+      //     }
+      //   }
+      // const head = [1,2,6,3,4,5,6], val = 6
+
+      // const myLinked = new linkedList()
+      // myLinked.append(1)
+      // myLinked.append(2)
+      // myLinked.append(4)
+      // myLinked.insertAt(3, 2)
+      // myLinked.remove(2)
+
+      // console.log(myLinked)
+    </script>
+</body>
+</html>

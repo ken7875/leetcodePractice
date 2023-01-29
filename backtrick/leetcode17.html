@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ["ad","ae","af","bd","be","bf","cd","ce","cf"] "23"
+        var letterCombinations = function(digits) {
+            let dictonary = {
+                "2": "abc",
+                "3": "def",
+                "4": "ghi",
+                "5": "jkl",
+                "6": "mno",
+                "7": "pqrs",
+                "8": "tuv",
+                "9": "wxyz",
+            }
+
+            let res = []
+
+            let k = digits.length
+            let path = []
+            if(k === 0) return []
+            if(k === 1) return dictonary[digits].split("")
+
+            backtrick(k, digits, 0)
+
+            function backtrick (k, n, startIdx) {
+                if(path.length === digits.length) {
+                    let pathToStr = path.join('')
+                    res.push(pathToStr)
+                    return
+                }
+
+                for (let i = 0; i < dictonary[digits[startIdx]].length; i++) {
+                    path.push(dictonary[digits[startIdx]][i])
+                    backtrick(k, n, startIdx + 1)
+                    path.pop()
+                }
+            }
+
+            return res
+        };
+
+        console.log(letterCombinations(""));
+    </script>
+</body>
+</html>

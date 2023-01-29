@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 單體模式
+        // 不重複生產新的物件，節省記憶體空間(但只能用在完全相同的物件上)
+        class animal {
+            constructor() {
+              this.isAnimal = true
+            }
+            show() {
+                console.log(this.name)
+            }
+        }
+        class Cat extends animal {
+            constructor () {
+            if(typeof Cat.instance === 'object') {
+                return Cat.instance
+            }
+            super()
+            this.name = 'unique'
+            Cat.instance = this
+          }
+        }
+
+        const a = new Cat()
+        const b = new Cat()
+        b.show()
+        console.log(a === b); // true
+        console.log(Cat.prototype);
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="../backtrick/leetcode77.js"></script> -->
+</head>
+<body>
+<script>
+  let n = 4, k = 2
+
+  var combine = function(n, k) {
+    let res = []
+    let startIdx = 1
+    let path = []
+
+    backtrick(n, k, startIdx)
+
+    function backtrick (n, k, startIdx) {
+      if(path.length === k) {
+        console.log(path)
+        res.push([...path])
+        return
+      }
+
+      for (let i = startIdx; i <= n - (k - path.length) + 1; i++) {
+        console.log(i, n - (k - path.length), 'sadasdasd', startIdx)
+        path.push(i)
+
+        backtrick(n, k, i + 1)
+        path.pop()
+        console.log(path)
+      }
+    }
+
+    return res
+  };
+
+  console.log(combine(n, k))
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      const nums = [1,0,-1,0,-2,2], target = 0
+      var fourSum = function(nums, target) {
+        nums = nums.sort((a, b) => a - b)
+        let resAry = []
+        for(let i = 0; i < nums.length; i++) {
+            if(nums[i] === nums[i - 1]) continue
+            if(nums[i] > target) return resAry
+
+            for (let k = 1; k < nums.length; k++) {
+                let l = k + 1, r = nums.length - 1
+                let lNums = nums[l], rNums = nums[r], iNums = nums[i] + nums[k]
+                console.log(lNums, rNums, iNums)
+                if(nums[k] === nums[k - 1]) continue
+                while(l < r) {
+                    console.log(l, r)
+                    if(iNums + lNums + rNums < 0) {
+                        l++
+                    } else if(iNums + lNums + rNums > 0) {
+                        r--
+                    } else {
+                        resAry.push([nums[i], nums[k], lNums, rNums])
+
+                        while(l < r && nums[l] === nums[l + 1]) {
+                        l++
+                        }
+                        while(l < r && nums[r] === nums[r - 1]) {
+                        r--
+                        }
+                    }
+                    l++
+                    r--
+                }
+            }
+        }
+
+          return resAry
+      };
+
+      console.log(fourSum(nums, target));
+    </script>
+</body>
+</html>

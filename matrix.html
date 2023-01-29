@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // [1,2,3]
+        // [4,5,6]
+        // [7,8,9]
+        // startX(陣列平行頭) startY(陣列垂直頭)
+        var spiralOrder = function(matrix) {
+            let startX = 0, startY = 0
+            let endX = matrix[0].length - 1, endY = matrix.length - 1
+            let res = []
+
+            while (true) {
+                for(let i = startX; i <= endX; i++) {
+                    res.push(matrix[startY][i])
+                }
+                if(++startY > endY) {
+                    break
+                }
+                for(let i = startY; i <= endY; i++) {
+                    res.push(matrix[i][endX])
+                }
+                if(--endX < startX) {
+                    break
+                }
+                for(let i = endX; i >= startX; i--) {
+                    res.push(matrix[endY][i])
+                }
+                if(--endY < startY) {
+                    break
+                }
+                for(let i = endY; i >= startY; i--) {
+                    res.push(matrix[i][startX])
+                }
+                if(++startX > endX) {
+                    break
+                }
+            }
+
+            return res
+        };
+
+        console.log(spiralOrder([[1,2,3],[4,5,6],[7,8,9]]));
+    </script>
+</body>
+</html>

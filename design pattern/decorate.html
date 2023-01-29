@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 裝飾者模式: 替原有的物件新增功能
+        class Computer {
+          constructor () {
+            this.price = 41900
+          }
+          addMemo () {
+            this.price += 10000
+          }
+          addName () {
+            this.price += 100
+          }
+          addInsurance () {
+            this.price += 100
+          }
+        }
+        const a = new Computer()
+        a.addMemo()
+        a.addName()
+        console.log(a);
+    </script>
+</body>
+</html>

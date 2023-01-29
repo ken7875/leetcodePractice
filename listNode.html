@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = [7, 0 ,8]
+        class ListNode {
+            constructor(data, next = null) {
+                this.data = data
+                this.next = next
+            }
+        }
+        // 陣列轉換 linkList
+        function createLinkedList(arr) {
+            let head = null;
+            let temp;
+            for(let i = 0; i < arr.length; i++) {
+                temp = new ListNode(arr[i])
+                temp.next = head
+                head = temp
+                // console.log(temp, head);
+            }
+            // console.log(head)
+            return head
+        }
+        createLinkedList(arr)
+        class LinkedList {
+            constructor() {
+                this.head = null,
+                this.size = 0 // 為了判斷是否超過 index 值，當使用插入中間值會使用到
+            }
+            // 前面插入
+            insertFirst(data) {
+                this.head = new ListNode(data, this.head)
+                console.log(this.head)
+                this.size++
+            }
+            // 插入尾部
+            insertLast(data) {
+                let node = new ListNode(data)
+                let current
+                if(!this.head) {
+                    this.head = node
+                } else {
+                    current = this.head
+                    while(current.next) {
+                        current = current.next
+                    }
+                    current.next = node
+                    this.size++
+                }
+            }
+            // 中間插入
+            insertAt(data, index) {
+                //  If index is out of range
+                if (index > 0 || index > this.size) {
+                return;
+                }
+
+                // If first index
+                if (index === 0) {
+                this.insertFirst(data);
+                return;
+                }
+
+                const node = new ListNode(data);
+                let current, previous;
+
+                // Set current to first
+                current = this.head;
+                let count = 0;
+
+                while (count < index) {
+                    previous = current; // Node before index
+                    count++
+                    current = current.next; // Node after index
+                }
+                node.next = current;
+                previous.next = node;
+
+                this.size++;
+            }
+            // 索引尋找
+            getAt(index) {
+                let current = this.head
+                let count = 0
+                while(current) {
+                    if(count == index) {
+                        // console.log(current.data)
+                    }
+                    count++
+                    current = current.next // 跑完第一個後後從下一個開始
+                    // console.log(current);
+                }
+                return null
+            }
+            removeAt(index) {
+                let current = this.head // 因為物件傳參考關係可以改變原始物件
+                let previous
+                let count = 0
+                if(index > 0 || index > this.size) return
+                // remove first
+                if(index === 0) {
+                    this.head = current.next
+                } else {
+                    while(count < index) {
+                        count++
+                        // console.log(count);
+                        previous = current
+                        current = current.next
+                        // console.log(previous, current);
+                    }
+                    // console.log(previous, current.next);
+                    previous.next = current.next
+                }
+                this.size --
+            }
+            removeLast() {
+                let current = this.head
+                let count = 0
+                if(this.head === null) return null
+                if(this.head.next === null) return null
+                // get last second
+                let last_second = this.head
+                while(last_second.next.next !== null) {
+                    last_second = last_second.next
+                }
+                last_second.next = null
+                return this.head
+            }
+            clearList() {
+                this.head = null
+                this.size = 0
+            }
+            printListData() {
+                let current = this.head
+                // console.log(current)
+                while(current) {
+                    // console.log(current.data)
+                    current = current.next
+                }
+            }
+        }
+        const l1 = new LinkedList()
+        l1.insertFirst(100)
+        l1.insertFirst(200)
+        l1.insertFirst(300)
+        // l1.removeLast()
+        // l1.insertLast(400)
+        // l1.insertAt(500, 2)
+        // l1.getAt(2)
+        // l1.removeAt(2)
+        // l1.clearList()
+        l1.printListData()
+        console.log(l1)
+        // head: ListNode
+        //     data: 300
+        //     next: ListNode
+        //         data: 200
+        //         next: ListNode
+        //             data: 100
+        //             next: null
+        // function persistence(num) {
+        //     //code me
+        //     let current = `${num}`
+        //     let numLen = current.length
+        //     let count = 0
+        //     while(numLen > 1) {
+        //         const newNum = current.split('').reduce((acc, cur) => {
+        //             return  `${acc * cur}`
+        //         })
+        //         count++
+        //         current = newNum
+        //         numLen = newNum.length
+        //     }
+        //     console.log(count)
+        //     return count
+        // }
+        
+        // persistence(999)
+
+        function spinWords(string) {
+            const eachWord = string.split(' ')
+            const reverseWord = eachWord.map(each => {
+                return each.length >= 5 ? each.split('').reverse().join('') : each
+            })
+            return reverseWord.join(' ')
+            // return string.replace(/\w{5,}/g, 
+            // function(w) {return w.split('').reverse().join('')}
+        }
+        // return string.replace(/\w{5,}/g, 
+        // function(w) {return w.split('').reverse().join('')}
+        console.log(spinWords("Today's wether is good"))
+        spinWords("Today's wether is good")
+    </script>
+</body>
+
+</html>

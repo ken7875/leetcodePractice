@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * @param {number} capacity
+         */
+        var LRUCache = function(capacity) {
+            this.capacity = capacity
+            this.size = 0
+            this.store = new DoublyLinkedList();
+            this.map = new Map()
+        };
+
+        /** 
+         * @param {number} key
+         * @return {number}
+         */
+        LRUCache.prototype.get = function(key) {
+            console.log(this.map.get(key))
+            return this.map.get(key)
+        };
+
+        /** 
+         * @param {number} key 
+         * @param {number} value
+         * @return {void}
+         */
+        LRUCache.prototype.put = function(key, value) {
+            this.map.set(key, value)
+        };
+
+        function ListNode (key, val) {
+          this.key = key
+          this.val = val
+          this.prev = null
+          this.next = null
+        }
+
+        ListNode.prototype.remove = function() {
+          this.prev.next = this.next
+        }
+
+        const lruCache = new LRUCache(2)
+        lruCache.put(1, 1)
+        lruCache.put(2, 2)
+        lruCache.get(1)
+        lruCache.put(3, 3)
+        lruCache.get(2)
+
+        /** 
+         * Your LRUCache object will be instantiated and called as such:
+         * var obj = new LRUCache(capacity)
+         * var param_1 = obj.get(key)
+         * obj.put(key,value)
+         */
+    </script>
+</body>
+</html>

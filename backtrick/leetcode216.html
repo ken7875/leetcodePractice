@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const k = 9, n = 45
+
+        var combinationSum3 = function(k, n) {
+            let path = []
+            let startIdx = 1
+            let sum = 0
+            let res = []
+
+            backtrickHelper(k, n, startIdx)
+            function backtrickHelper (k, n, startIdx) {
+                if(sum > n) {
+                  return
+                }
+                if(path.length === k) {
+                  if(sum === n) {
+                    res.push([...path])
+                    return
+                  }
+
+                }
+
+                for(let i = startIdx; i <= 9 - (k - path.length) + 1; i++) {
+                  path.push(i)
+                  sum += path[path.length - 1]
+                  
+                  backtrickHelper(k, n, i + 1)
+
+                  sum -= path[path.length - 1]
+                  path.pop()
+                }
+            }
+
+            console.log(res)
+
+            return res
+        };
+
+        combinationSum3(k, n)
+        // var combinationSum3 = function(k, n) {
+        //     let res = [];
+        //     let path = [];
+        //     let sum = 0;
+        //     const dfs = (path,index) => {
+        //         // 剪枝操作
+        //         if (sum > n){
+        //             return 
+        //         }
+        //         if (path.length == k) {
+        //             if(sum == n){
+        //                 res.push([...path]);
+        //                 return 
+        //             }
+        //         }
+        //         for (let i = index; i <= 9 - (k-path.length) + 1;i++) {
+        //             path.push(i);
+        //             sum = sum + i;
+        //             index += 1;
+        //             dfs(path,index);
+        //             sum -= i
+        //             path.pop()
+        //         }
+        //     }
+        //     dfs(path,1);
+        //     console.log(res);
+        //     return res
+        // };
+        // combinationSum3(k, n)
+    </script>
+</body>
+</html>
